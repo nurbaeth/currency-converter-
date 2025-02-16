@@ -1,0 +1,30 @@
+import requests
+
+def get_exchange_rate(base_currency, target_currency):
+    api_key = "YOUR_API_KEY"  # Получи ключ на exchangeratesapi.io
+    url = f"https://api.exchangeratesapi.io/v1/latest?access_key={api_key}&base={base_currency}"
+    
+    response = requests.get(url)
+    data = response.json()
+    
+    if "error" in data:
+        print("Ошибка получения курса валют:", data["error"]) 
+        return None
+    
+    return data["rates"].get(target_currency)
+
+def convert_currency(amount, base_currency, target_currency):
+    rate = get_exchange_rate(base_currency, target_currency)
+    if rate is None:
+        return None
+    return amount * rate
+
+if __name__ == "__main__":
+    amount = float(input("Введите сумму: "))
+    base_currency = input("Из какой валюты (например, USD): ").upper()
+    target_currency = input("В какую валюту (например, EUR): ").upper()
+    
+    result = convert_currency(amount, base_currency, target_currency)
+    
+    if result is not None:
+        print(f"{amount} {base_currency} = {result:.2f} {target_currency}")
