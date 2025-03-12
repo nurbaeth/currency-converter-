@@ -11,5 +11,5 @@
 1. Установите Python (если не установлен).    
 2. Установите зависимости:  
    ```bash         
-   pip install requests       
+   pip install requests        
  
