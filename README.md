@@ -12,4 +12,5 @@
 2. Установите зависимости:  
    ```bash          
    pip install requests        
+  
  
